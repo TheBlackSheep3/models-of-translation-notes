@@ -11,40 +11,16 @@ $
 for all $m in M$ and $m' in M'$, are again monoid homomorphisms.
 
 #text(blue)[
-  Let the monoids $M = (M,dot,1)$, $M' = (M',dot.circle,1)$, and $N = (N,+,0)$.
+  We start with $f$. Obviously, $f(1) = h(1,1) = 1$ and
   $
-  f(1) &= h(1,1) = 0 \
-  f(m_1 dot m_2) &= h(m_1 dot m_2, 1) = h(m_1 dot m_2, 1 dot.circle 1) = h(m_1, 1) + h(m_2, 1)
+  f(m_1 dot.c m_2) = h(m_1 dot.c m_2, 1 dot.c 1) = h(m_1,1) dot.c h(m_2,1) = f(m_1) dot.c f(m_2)
   $
+  for all $m_1,m_2 in M$, which proves that $f$ is a monoid homomorphism. The proof for $g$ is entirely analogous. Finally $h'(1,1) = (f(1),g(1)) = (1,1)$ and
   $
-  g(1) &= h(1,1) = 0 \
-  g(m'_1 dot.circle m'_2) &= h(1, m'_1 dot.circle m'_2) = h(1 dot 1, m'_1 dot.circle m'_2) = h(1, m'_1) + h(1, m'_2)
-  $
-  $
-  h'(1,1) &= (f(1),g(1)) = (0,0) \
-  h'(m_1 dot m_2, m'_1 dot.circle m'_2) &= (f(m_1 dot m_2),g(m'_1 dot.circle m'_2)) \
-  &= (h(m_1, 1) + h(m_2,1), h(1, m'_1) + h(1, m'_2))
-  $
-  #align(right)[$square.stroked$]
-]
-
-#text(red)[
-  seien $m_1, m_2 in M$, dann gilt
-  $
-  f(m_1,m_2) &= h(m_1 dot.c m_2, 1) \
-  &= h((m_1,1) dot.c (m_2,1)) \ 
-  &= h(m_1,1) dot.c h(m_2,1) \
-  &= f(m_1) dot.c f(m_2)
-  $
-  $g$ analog
-  $
-  h'(1,1) = (f(1),g(1)) = (1,1)
-  $
-  seien $m_1,m_2 in M, m'_1, m'_2 in M'$, dann gilt
-  $
-  h'((m_1,m'_1) dot.c (m_2,m'_2)) &= h'(m_1 m_2, m'_1 m'_2)\
-  &= (f(m_1 m_2), g(m'_1 m'_2)) \
-  &= (f(m_1)f(m_2), g(m'_1)g(m'_2) \ "etc."
+  h'((m_1,m'_1) times (m_2,m'_2)) &= h'(m_1 dot.c m_2, m'_1 dot.c m'_2) = (f(m_1 dot.c m_2), g(m'_1 dot.c m'_2)) \
+  &= (f(m_1) dot.c f(m_2), g(m'_1) dot.c g(m'_2)) \
+  &= (f(m_1), g(m'_1)) times (f(m_2), g(m'_2)) \
+  &= h'(m_1, m'_1) times h'(m_2, m'_2)
   $
 ]
 
@@ -55,76 +31,43 @@ x y_1^* y_2^* dots.h.c y_n^* quad "with" n in NN, x, y_1, ... , y_n in NN^A.
 $
 
 #text(blue)[
-  To show $L in Rat(A^plus.circle) <=> L union.big_(i=0)^k x_i y_(i.1)^* dots y_(i.n)^*$ with $k,i.1, i.n in NN, x, y_(i.1), y_(i.n) in NN^A$
-
-  == $L in Rat(A^plus.circle) => L union.big_(i=0)^k x_i y_(i.1)^* dots y_(i.n)^*$
-
-  == $L in Rat(A^plus.circle) arrow.l.double L union.big_(i=0)^k x_i y_(i.1)^* dots y_(i.n)^*$
-]
-
-#text(red)[
-  $NN^A = {f: A -> NN | f "Funktion"}$
-
-  $L in Rat(A^plus.circle) <=> L$ semilinear, d.h. endliche Vereinigung von Mengen der Form $x y_1^* dots y_n^* = {x} dot.c {y_1}^* dot.c dots.c dot.c {y_n}^*, x,y_1,dots,y_n in A^plus.circle$
-  == "$arrow.l.double$"
-  Alle in der Darstellung verwendeten Operationen erhalten Rationalität und alle Einpunktmengen sind rational.
-
-  == "$arrow.r.double$"
-  1. Zeige $emptyset, {x}, (x in A^plus.circle)$ besitzt semilineare Darstellung. $emptyset$: leere Vereinigung, ${x}$: ist bereits eine semilineare Darstellung
-  2. Vereinigung $union$: eine Vereinigung zweier endlicher vereinigungen ist wieder eine endliche Vereinigung
-  3. Konkatination $dot.c$: sei $L = union.big_(i=0)^m L_i, K = union.big_(i=0)^n, L_i, K_i$ von Form $x, y_1^* ...$
+  We first observe that $L^* = L^+ union {epsilon}$ for all $L subset.eq A^plus.circle$, so star and iteration closure are equivalent given the remaining closures of the rational sets. With these ovservations, the semilinear sets are obviously rational. For the converse, the empty set $emptyset$ (i.e., empty union) and the singletons ($x y^*_1 dots.c y^*_n$ for $n = 0$) are semilinear and the semilinear sets are closed under union. The product of two semilinear sets is certainly a finite union of products of the form
   $
-  L dot.c K = union.big_(i=0)^m union.big_(j=0)^n L_i K_j, quad "angenommen" L_i = x y_1^* dots.c y_p^*, K_j= hat(x) hat(y_1)^* dots.c hat(y_q)^*\
-  "dann" L_i K_j = (x hat(x)) y_1^* dots.c y_p^* hat(y_1)^* dots.c hat(y_q)^*
+  (x y^*_1 y^*_2 dots.c y^*_n) dot.c (x' z^*_1 z^*_2 dots.c z^*_m) quad "with" n,m in NN, x,x',y_1,dots,y_n,z_1,dots,z_m in A^plus.circle.
   $
-  4. Kleene-Stern $*$: $L = union.big_(i=0)^m L_i ~> L^* = product_(i=0)^m L_i^* = emptyset dot.c x^* y_1^* dots y_p^*$\
-  $
-  (L union K)^* = L^* K^*\
-  L_i = x y_1^* dots y_p^* => L_i^* = x^* y_1^* dots y_p^*
-  $
-  Sei $cal(S)$ die Menge an Sprachen in dieser Form .... Sie ist abgeschlossen unter $union$, $dot.c$, $*$ und enthaelt $emptyset, {x}$. Die Menge der rationalen Menge $Rat(A^plus.circle)$ ist die kleinste Menge, welche diese Eigenschaften erfuellt. Demnach ist $Rat(A^plus.circle) subset.eq cal(S)$.
+  The latter product equates to $(x x')y^*_1 y^*_2 dots.c y^*_n z^*_1 z^*_2 dots.c z^*_m$, which shows that semilinear sets are closed under products. It remains to show that they are also closed under start. We first observe that $(L union M)^* = L^* M^*$ since the order is irrelevant. Additionally #box[$(x y^*_1 y^*_2 dots.c y^*_n) = x^* y^*_1 y^*_2 dots.c y^*_n$], which shows closure under star. Since rational sets are the smallest class with those closure properties, it follows that each ration set is semiliniear.
 ]
 
 #exercise()
 Demonstrate that, in general, the rational relations are not closed under intersection. \
 _Hint:_ Investigate $Rat({a}^* times {b,c}^*)$.
 
-#text(red)[
+#text(blue)[
+  We consider the relations
   $
-  L_1 &= (a,b)^* dot.c (epsilon,c)^* = {(a^n,b^n,c^m) | m,n in NN_0}\
-  L_2 &= (epsilon,b)^* dot.c (a,c)^* = {(a^n,b^m,c^n) | m,n in NN_0}\
-  L_1 inter L_2 &= {(a^n, b^n c^n) | n in NN_0}
+  R = {(epsilon,b)}^*{(a,c)}^* = {(a^k,b^l c^k) | l,k in NN}\
+  S = {(a,b)}^*{(epsilon,c)}^* = {(a^k,b^k c^l) | l,k in NN}
   $
+  and their intersection $R inter S = {(a^k,b^k c^k) | k in NN}$. Suppose that $R inter S$ is rational and consider the mapping $h : {a}^* times {b,c}^* -> {b,c}^*$ given by $h(u,v) = v$ for all $u in {a}^*$ and $v in {b,c}^*$. Then $h(epsilon, epsilon) = epsilon$ and
   $
-  pi_2: {a}^* times {b,c}^* -> {b,c}^* "ist Homomorphismus" \
-  pi_2(L_1 inter L_2) = {b^n c^n | n in NN_0} =: K
+  h((u,v) times.circle (u',v')) = h(u u', v v') = v v' = h(u,v)h(u',v')
   $
-  falls $L_1 inter L_2 in Rat({a}^* times {b,c}^*)$, dann auch $K$ $arrow.zigzag$
-
-  Damit auch kein Komplement, da $L inter K = (L^C union K^C)^C$
+  for all $u,u' in {a}^*$ and $v,v' in {b,c}^*$, which shows that $h$ is a homomorphism. Consequently, $h(R inter S) = {b^k c^k | k in NN} in Rat({a,b}^*)$, which is a contradiction, so $R inter S$ cannot be rational.
 ]
 
 #exercise()
 Let $M$ be a group. Prove that $L^(-1) = {m^(-1) | m in L} in Rat(M)$ for all $L in Rat(M)$.
 
 #text(blue)[
-  The group $M = (M,dot.c,1)$ with $m^(-1) in M <=> m in M$. Define the homomorphism $h : M -> M, m |-> m^(-1)$. This homomorphism is a group homomorphism.
+  Consider the set $cal(R)$ of set $L subset.eq M$ such that $L^(-1)$ is rational. Clearly $emptyset in cal(R)$ and ${m} in cal(R)$ for all $m in M$ because ${m}^(-1) = {m^(-1)}$ is a singleton. Moreover, $(U union V)^(-1) = U^(-1) union V^(-1)$ for all $U, V subset.eq M$, which proves closure under union. For the product, we observe that
   $
-  h(1) &= 1^(-1) = 1 \
-  h(m^(-1)) &= (m^(-1))^(-1) = h(m)^(-1) \
-  h(m dot.c m') &= (m dot.c m')^(-1) = m^(-1) dot.c m'^(-1) = h(m) dot.c h(m')
+  (U V)^(-1) = {(u v)^(-1) | u in U, v in V} = {v^(-1)u^(-1) | u in U, v in V} = V^(-1) U^(-1)
   $
-  #text(red)[funktioniert nicht, da Operation nicht zwangslaeufig kommutativ]
-]
-
-#text(red)[
-  == Beweis durch strukturelle Induktion
-  Sei $L in Rat(M)$
-  1. falls $L = emptyset$, dann $L^(-1) = L in Rat(M)$
-  2. falls $L = {m}$ $(m in M)$, dann $L^(-1) = {m^(-1)} in Rat(M)$, da einelementig
-  3. falls $L = K_1 union K_2$ mit $K_1^(-1), K_2^(-1) in Rat(M)$, dann $K_1, K_2 in Rat(M)$
-  4. falls $L = K_1 K_2$ mit $K_1, K_2, K_1^(-1), K_2^(-1) in Rat(M)$, dann $L^(-1) = {underbrace((k_1 k_2)^(-1), k_2^(-1) k_1^(-1)) | k_1 in K_1, k_2 in K_2} = K_2^(-1) K_1^(-1) in Rat(M)$, da abgeschlossen unter #math.dot.c
-  5. falls $L = K^*$ mit $K,K^(-1) in Rat(M)$, dann $L^(-1) = {underbrace((k_1 dots k_n)^(-1),k_n^(-1) dots k_1^(-1)) | n in NN_0, k_1,dots,k_n in K}=(K^(-1))^* in Rat(M)$, da abgeschlossen unter $*$.
-
-  Nach Beweisprinzip der strukturellen Induktions gilt Aussage fuer $Rat(M)$.
+  which proves closure under product. Finally,
+  $
+  (U^*)^(-1) &= {(u_1 dots.c u_n)^(-1) | n in NN, u_1, dots, u_n in U} \
+             &= {(u_n^(-1) dots.c u_1^(-1)) | n in NN, u_1, dots, u_n in U} \
+             &= {(v_1 dots.c v_n | n in NN, v_1, dots, v_n in U^(-1)} = (U^(-1))^*
+  $
+  which proves closure under star. Consequently, $cal(R)$ contains all rational sets, so $L^(-1)$ is rational for all rational $L subset.eq M$.
 ]
