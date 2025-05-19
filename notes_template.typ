@@ -19,6 +19,7 @@
   set align(center)
   text(weight: "bold", 18pt, context{document.title})
   set align(left)
+  show math.equation: eq => box[#eq]
   doc
 }
 
