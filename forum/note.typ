@@ -4,6 +4,6 @@
 
 = Homework
 
-In my homework I need to reference some content from the lectures like #lecture_ref("def1_1"), #lecture_ref("the1_2"), #lecture_ref("def2_2")
+In my homework I need to reference some content from the lectures like #lecture_ref("def1_1"), #lecture_ref("the1_2"), #lecture_ref("def2_2"), #lecture_ref("lem3_1")
 
 Unused lecture references should not appear in the document
