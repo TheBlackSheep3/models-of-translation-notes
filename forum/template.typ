@@ -32,31 +32,25 @@
 )
 
 #let lecture_ref(def) = context {
-  let state = state("used_literature_refs")
+  let state = state("used_literature_refs", ())
   let array = state.get()
-  if array == none {
-    state.update((def,))
-  }
-  else if not array.contains(def) {
-    state.update((..array,def))
+  if not array.contains(def) {
+    state.update(array => array + (def,))
   }
   ref(label(def))
 }
 
 #let used_lecture_refs() = context {
   let used = state("used_literature_refs").final()
-  if (used != none and used.len() > 0) {
-    text[= Lecture References]
-    set heading(numbering: "1.1")
-    for (key, value) in lecture_refs {
-      if key in used {
-        counter(heading).update((value.lecture, value.index - 1))
-        text[
-          #heading(depth: 2, supplement: value.type)[#value.type]#label(key)
-          #value.content
-        ]
-      }
-    }
+  if used.len() == 0 { return }
+  text[= Lecture References]
+  set heading(numbering: "1.1")
+  for (key, value) in used.map(key => (key, lecture_refs.at(key))) {
+    counter(heading).update((value.lecture, value.index - 1))
+    text[
+      #heading(depth: 2, supplement: value.type)[#value.type]#label(key)
+      #value.content
+    ]
   }
 }
 
