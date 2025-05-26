@@ -1,3 +1,5 @@
+#import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge
+
 #let Rec = "Rec"
 #let Rat = "Rat"
 #let dom = "dom"
@@ -8,11 +10,12 @@
   [= Exercise #context{counter("sheet").display()}.#context{c.display()}]
 }
 
+#let ref_type = (definition: "Definition", theorem: "Theorem", lemma: "Lemma")
 #let lecture_refs = (
   def1_1: (
     lecture: 1,
     index: 1,
-    type: "Definition",
+    type: ref_type.definition,
     description: "monoid",
     content: [
       Algebraic structure $(M, dot.c, 1)$ is *monoid* if
@@ -23,7 +26,7 @@
   def1_2: (
     lecture: 1,
     index: 2,
-    type: "Definition",
+    type: ref_type.definition,
     description: "finitely generated monoid",
     content: [
       Monoid $(M, dot.c, 1)$ is *finitely generated* if there exists finite set $G subset.eq M$ with
@@ -35,25 +38,57 @@
   the1_6: (
     lecture: 1,
     index: 6,
-    type: "Theorem",
+    type: ref_type.theorem,
     description: "closure properties",
     content: [
       $(Rec(M),union,inter,overline(dot.c),emptyset,M)$ is Boolean algebra for any monoid $(M, dot.c,1)$
     ],
   ),
+  the1_8: (
+    lecture: 1,
+    index: 8,
+    type: ref_type.theorem,
+    description: "Mezei's theorem",
+    alternative_text: "Mezei's theorem",
+    content: [
+      Let $M, M'$ be monoids. Then $R in Rec(M times M')$ if and only if $R$ is finite union of sets $L times L'$ with $L in Rec(M)$ and $L' in Rec(M')$
+    ],
+  ),
   the2_4: (
     lecture: 2,
     index: 4,
-    type: "Theorem",
+    type: ref_type.theorem,
     description: "McKnight 1964",
     content: [
       $Rec(M) subset.eq Rat(M)$ for every finitely generated monoid $M$
     ],
   ),
+  the2_8: (
+    lecture: 2,
+    index: 8,
+    type: ref_type.theorem,
+    description: "Nivat 1968",
+    alternative_text: "Nivat's theorem",
+    content: [
+      Let $A, B$ alphabets. Then $R in Rat(A^* times B^*)$ iff there exists alphabet $C$, homomorphisms $h : C^* -> A^*$ and $h' : C^* -> B^*$, and regular language $L subset.eq C^*$ such that $R = {(h(w), h'(w)) | w in L}$
+      #align(center)[
+        #diagram(
+          node((1,0), $C^*$, name: <left-c>),
+          node((3,0), $C^*$, name: <right-c>),
+          node((0,1), $A^*$, name: <a>),
+          node((4,1), $B^*$, name: <b>),
+          edge(<left-c>, <right-c>, $inter L$, "-"),
+          edge(<a>, <b>, $R$, "-"),
+          edge(<left-c>, <a>, $h$, "->"),
+          edge(<right-c>, <b>, $h'$, "->"),
+        )
+      ]
+    ],
+  ),
   the3_5: (
     lecture: 3,
     index: 5,
-    type: "Theorem",
+    type: ref_type.theorem,
     description: "",
     content: [
       Let $A, B$ alphabets with $|A| >= 2 <= |B|$. Given $R,S in Rat(A^* times B^*)$ it is #underline[undecidable] whether
@@ -65,10 +100,19 @@
       - $R in Rec(A^* times B^*)$ #text(gray)[recognizability]
     ],
   ),
+  the3_6: (
+    lecture: 3,
+    index: 6,
+    type: ref_type.theorem,
+    description: "emptiness and finiteness",
+    content: [
+      Emptiness and finiteness of $R$ are decidable for rational $R subset.eq A^* times B^*$
+    ],
+  ),
   lem7_1: (
     lecture: 7,
     index: 1,
-    type: "Lemma",
+    type: ref_type.lemma,
     description: "",
     content: [
       Let $A,B$ alphabets with total order on $A$ extending to lexicographic order <= on $A^*$. Let $h : A^* -> B^*$ homomorphism with $h(a) = {epsilon} union B$ for all $a in A$. Then relation $R$ rational for
@@ -79,62 +123,41 @@
   ),
 )
 
-#let lecture_ref(use: false, def) = context {
-    let state = state("used_literature_refs")
-    let array = state.get()
-    if array == none {
-      state.update((def,))
-    }
-    else if not array.contains(def) {
-      state.update((..array,def))
-    }
-  if use {
-    ref(label(def))
+#let lecture_ref(use_alt: false, short: false, def) = context {
+  let state = state("used_literature_refs", ())
+  let array = state.get()
+  if not array.contains(def) {
+    state.update(array => array + (def,))
   }
-  def
+  if use_alt {
+    link(label(def), lecture_refs.at(def).alternative_text)
+  } else {
+    if short {
+      let ref = lecture_refs.at(def)
+      link(label(def), [#ref.lecture.#ref.index])
+    } else {
+      ref(label(def))
+    }
+  }
 }
 
 #let used_lecture_refs() = context {
   let used = state("used_literature_refs").final()
-  if (used != none and used.len() > 0) {
-    text[= Lecture References]
-    text[#used]
-    set heading(numbering: "§1.1")
-    for (key, value) in lecture_refs {
-      if key in used {
-        // text[
-        //   == #key
-        //
-        //   #value.lecture
-        //   #value.index
-        //   #value.type
-        //   #value.description
-        // ]
-        counter(heading).update((value.lecture, value.index - 1))
-        text[
-          #if "" == value.description {
-            text[#heading(depth: 2, supplement: value.type)[#value.type]#label(key)]
-          } else {
-            text[#heading(depth: 2, supplement: value.type)[#value.type (#value.description)]#label(key)]
-          }
-          #key
-          #value.content
-        ]
-      }
+  if used.len() == 0 { return }
+  text[= Lecture References]
+  set heading(numbering: "1.1")
+  for (key, value) in lecture_refs {
+    if key in used {
+      counter(heading).update((value.lecture, value.index - 1))
+      text[
+        #if "" == value.description {
+          text[#heading(depth: 2, supplement: value.type)[#value.type]#label(key)]
+        } else {
+          text[#heading(depth: 2, supplement: value.type)[#value.type (#value.description)]#label(key)]
+        }
+        #value.content
+      ]
     }
-    // for key in used {
-    //   let value = lecture_refs.at(key)
-    //   counter(heading).update((value.lecture, value.index - 1))
-    //   text[
-    //     #if "" == value.description {
-    //       text[#heading(depth: 2, supplement: value.type)[#value.type]#label(key)]
-    //     } else {
-    //       text[#heading(depth: 2, supplement: value.type)[#value.type (#value.description)]#label(key)]
-    //     }
-    //     #key
-    //     #value.content
-    //   ]
-    // }
   }
 }
 
@@ -162,5 +185,6 @@
   show math.equation: eq => box[#eq]
 
   doc
+  pagebreak()
   used_lecture_refs()
 }

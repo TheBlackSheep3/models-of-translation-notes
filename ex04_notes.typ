@@ -7,7 +7,7 @@
 Let $A$ be an alphabet with $|A| >= 2|$. Prove that $R = {(w,limits(w)^arrow.l) | w in A^*}$ is #underline[not] rational, where $limits(w)^arrow.l$ is the reversal of $w$.
 
 #text(blue)[
-  Show that $R$ is rational. Then by Nivat's theorem there exists a regular language $L subset.eq (A union A')^*$, where $A' = {a' | a in A}$ is a copy of $A$ disjoint to $A$, and two natural projections $pi, pi' : (A union A')^* -> A$ such that $R = {(pi(w), pi'(w)) | w in L}$. Thus $pi(a) = a$, $pi(b) = b$, and $pi(a') = pi(b') = epsilon$ as well as $pi'(a') = a$, $pi'(b') = b$, and $pi'(a) = pi'(b) = epsilon$. Using the pumping lemma on $L$, we obtain that there exists $n in NN$ and a decomposition of $w = w_1 w_2 w_3$, where $pi(w) = a^n b^n$ and $pi'(w) = b^n a^n$, such that $|w_1 w_2| <= n$ and $|w_2| >= 1$ and $w_1 w_2^* w_3 subset.eq L$. Obviously, $pi(w_1 w_2)$ is a prefix of $a^n$ and $pi'(w_1 w_2)$ is a prefix of $b^n$. Consequently, $w_2$ does only contain the letters $a$ and $b'$ and removing $w_2$ decreases the number of letters $a$ or $b'$ because $|w_2| >= 1|$. However $w_1 w_3 in L$ and thus $pi(w_1 w_3)$ contains fewer $a$ or $pi'(w_1 w_3)$ contains fewer $b$. On the other hand, $(pi(w), pi'(w)) in R$, which yields the number of occurences of letters need to coincide in $pi(w)$ and $pi'(w)$. We arrived at the desired contratdiction, which proves that $R$ is not rational.
+  Show that $R$ is rational. Then by #lecture_ref(use_alt: true, "the2_8") there exists a regular language $L subset.eq (A union A')^*$, where $A' = {a' | a in A}$ is a copy of $A$ disjoint to $A$, and two natural projections $pi, pi' : (A union A')^* -> A$ such that $R = {(pi(w), pi'(w)) | w in L}$. Thus $pi(a) = a$, $pi(b) = b$, and $pi(a') = pi(b') = epsilon$ as well as $pi'(a') = a$, $pi'(b') = b$, and $pi'(a) = pi'(b) = epsilon$. Using the pumping lemma on $L$, we obtain that there exists $n in NN$ and a decomposition of $w = w_1 w_2 w_3$, where $pi(w) = a^n b^n$ and $pi'(w) = b^n a^n$, such that $|w_1 w_2| <= n$ and $|w_2| >= 1$ and $w_1 w_2^* w_3 subset.eq L$. Obviously, $pi(w_1 w_2)$ is a prefix of $a^n$ and $pi'(w_1 w_2)$ is a prefix of $b^n$. Consequently, $w_2$ does only contain the letters $a$ and $b'$ and removing $w_2$ decreases the number of letters $a$ or $b'$ because $|w_2| >= 1|$. However $w_1 w_3 in L$ and thus $pi(w_1 w_3)$ contains fewer $a$ or $pi'(w_1 w_3)$ contains fewer $b$. On the other hand, $(pi(w), pi'(w)) in R$, which yields the number of occurences of letters need to coincide in $pi(w)$ and $pi'(w)$. We arrived at the desired contratdiction, which proves that $R$ is not rational.
 ]
 
 #exercise()
@@ -47,7 +47,7 @@ Show that both $R_0$ and $R_oo$ are rational.
   ]
   Hence $Rat(A^* times B^*) = cal(R)$, which proves that $dom(R_oo)$ is regular.
 
-  Finally, we need to prove that the regualr input restriction of a rational relation is again a rational relation. More specifically, given $S in Rat(A^* times B^*)$ and $I in Rat(A^*)$, we claim that $S' = {(u,v) in S | u in I}$ is again rational. By Nivat let $L subset.eq C^*$ be a regular center language and two homomorphisms $pi$ and $pi'$ such that $S = {(pi(w),pi'(w)) | w in L}$. Then $S' = {(pi(w), pi'(w)) | w in L inter pi^(-1)(I)}$ and obviously $pi^(-1)(I)$ is again regular, so also $L inter pi^(-1)(I)$ is regular. Thus $S'$ is rational by Nivat's theorem. Putting the pieces together we obtain that
+  Finally, we need to prove that the regualr input restriction of a rational relation is again a rational relation. More specifically, given $S in Rat(A^* times B^*)$ and $I in Rat(A^*)$, we claim that $S' = {(u,v) in S | u in I}$ is again rational. By Nivat let $L subset.eq C^*$ be a regular center language and two homomorphisms $pi$ and $pi'$ such that $S = {(pi(w),pi'(w)) | w in L}$. Then $S' = {(pi(w), pi'(w)) | w in L inter pi^(-1)(I)}$ and obviously $pi^(-1)(I)$ is again regular, so also $L inter pi^(-1)(I)$ is regular. Thus $S'$ is rational by #lecture_ref(use_alt: true, "the2_8"). Putting the pieces together we obtain that
   $
   R_oo = {(u,v) in R | u in dom(R_oo)}
   $
@@ -82,6 +82,25 @@ Show that all properties of #lecture_ref("the3_5") are decidable for recogniable
 
 #text(blue)[
   == $R inter S = emptyset$
-  We have that $R inter S in Rec(A^* times B^*) subset.eq Rat(A^* times B^*)$ by #lecture_ref("the1_6") and #lecture_ref("the2_4")
+  We have that $R inter S in Rec(A^* times B^*) subset.eq Rat(A^* times B^*)$ by #lecture_ref("the1_6") and #lecture_ref(short: true, "the2_4") and emptiness is decidable for rational relations bu #lecture_ref("the3_6").
+
+  == $R subset.eq S$
+  We have $R subset.eq S$ if and only if $R inter overline(S) = emptyset$. However,
+  $
+  R inter overline(S) in Rec(A^* times B^*) subset.eq Rat(A^* times B^*)
+  $
+  using again #lecture_ref("the1_6") and #lecture_ref(short: true, "the2_4") and emptiness is decidable for rational relations by #lecture_ref("the3_6").
+
+  == $R = S$
+  Clearly, $R = S$ if and only if $R subset.eq S$ and $S subset.eq R$. The latter two conditions are decidable by the previous item.
+
+  == $R = A^* times B^*$
+  Clearly, $A^* times B^*$ is recognizable by #lecture_ref(use_alt: true, "the1_8"). Consequently, the property is decidable by the previous item.
+
+  == $R$ is co-finite
+  Obviously $R$ is co-finite if and only if $overline(R)$ is finite. By #lecture_ref("the1_6") $overline(R)$ is recognizable and thus also rational by #lecture_ref("the2_4"). However, finiteness is decidable for rational relations by #lecture_ref("the3_6").
+
+  == $R in Rec(A^* times B^*)$
+  Trivially decidable because the answer is universally "yes".
 ]
 
