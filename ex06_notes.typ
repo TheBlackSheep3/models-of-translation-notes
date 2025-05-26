@@ -9,7 +9,7 @@ Let $A$ and $B$ be alphabets. Show that any partial function $f : A^* -> B^*$ wi
 #exercise()
 Let $A$ be an alphabet. Let $"dist"(w,w') = |w| + |w'| - 2 |and.big{w, w'}|$ for all $w,w' in A^*$, where $and.big L$ is the longest common prefix of the words of $L$.
 
-Prove the '$"dist"$' is a metric on $A^*$.
+Prove that '$"dist"$' is a metric on $A^*$.
 
 #exercise()
 Let $A$ and $B$ be alphabets and $f : A^* -> B^*$ be a rational function.
