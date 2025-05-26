@@ -3,6 +3,7 @@
 #let Rec = "Rec"
 #let Rat = "Rat"
 #let dom = "dom"
+#let ran = "ran"
 
 #let exercise(sheet: 1, exercise: 1) = {
   let c = counter("exercise")
@@ -83,6 +84,19 @@
           edge(<right-c>, <b>, $h'$, "->"),
         )
       ]
+    ],
+  ),
+  the2_10: (
+    lecture: 2,
+    index: 10,
+    type: ref_type.theorem,
+    description: "inverse, domain & range",
+    content: [
+      Let $R in Rat(A^* times B^*)$ for alphabets $A,B$. Then $R^(-1) in Rat(B^* times A^*)$ and domain $dom(R)$ and range $ran(R)$ are rational
+      $
+      dom(R) &= {v in A^* | exists w in B^* : (v,w) in R} \
+      ran(R) &= {w in B^* | exists v in A^* : (v,w) in R}
+      $
     ],
   ),
   the3_5: (
