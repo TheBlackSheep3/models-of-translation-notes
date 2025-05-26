@@ -143,7 +143,7 @@
 
 #let used_lecture_refs() = context {
   let used = state("used_literature_refs").final()
-  if used.len() == 0 { return }
+  if used == none or used.len() == 0 { return }
   text[= Lecture References]
   set heading(numbering: "1.1")
   for (key, value) in lecture_refs {
