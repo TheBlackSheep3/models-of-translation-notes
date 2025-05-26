@@ -82,7 +82,7 @@ Show that all properties of #lecture_ref("the3_5") are decidable for recogniable
 
 #text(blue)[
   == $R inter S = emptyset$
-  We have that $R inter S in Rec(A^* times B^*) subset.eq Rat(A^* times B^*)$ by #lecture_ref("the1_6") and #lecture_ref(short: true, "the2_4") and emptiness is decidable for rational relations bu #lecture_ref("the3_6").
+  We have that $R inter S in Rec(A^* times B^*) subset.eq Rat(A^* times B^*)$ by #lecture_ref("the1_6") and #lecture_ref(short: true, "the2_4") and emptiness is decidable for rational relations by #lecture_ref("the3_6").
 
   == $R subset.eq S$
   We have $R subset.eq S$ if and only if $R inter overline(S) = emptyset$. However,
