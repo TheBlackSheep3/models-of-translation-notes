@@ -1,4 +1,4 @@
-#import "notes_template.typ": template, Rec, Rat, exercise
+#import "notes_template.typ": template, Rec, Rat, exercise, lecture_ref
 #import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge
 #show: template.with(
   sheet: 3,
@@ -29,7 +29,7 @@ $
 #text(color)[
   #set enum(indent: 0cm)
   + #text[
-    $A^* times L$ is obviously recognizable (by Mezei's theorem) and thus rational.
+    $A^* times L$ is obviously recognizable (by #lecture_ref(use_alt: true, "the1_8")) and thus rational.
   
     == Transducer
     #align(center)[
@@ -148,7 +148,7 @@ $
     $
     R = union.big_(q in Q)({w in A^* | delta^*(q_0,w) = q} times {w in A^* | delta^*(q,w) in F})
     $
-    of which the two languages in the Cartesian product are obviously regular. By Mezei's theorem $R$ is thus recognizable.
+    of which the two languages in the Cartesian product are obviously regular. By #lecture_ref(use_alt: true, "the1_8") $R$ is thus recognizable.
 
     == Transducer
     #align(center)[
