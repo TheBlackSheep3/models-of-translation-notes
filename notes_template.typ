@@ -4,6 +4,7 @@
 #let Rat = "Rat"
 #let dom = "dom"
 #let ran = "ran"
+#let dist = "dist"
 
 #let exercise(sheet: 1, exercise: 1) = {
   let c = counter("exercise")
