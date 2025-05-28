@@ -158,6 +158,7 @@
 #let used_lecture_refs() = context {
   let used = state("used_literature_refs").final()
   if used == none or used.len() == 0 { return }
+  pagebreak()
   text[= Lecture References]
   set heading(numbering: "1.1")
   for (key, value) in lecture_refs {
@@ -199,6 +200,5 @@
   show math.equation: eq => box[#eq]
 
   doc
-  pagebreak()
   used_lecture_refs()
 }
